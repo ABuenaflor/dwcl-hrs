@@ -57,6 +57,8 @@ php artisan serve              # http://localhost:8000
 
 Demo data is skipped when `APP_ENV=production`.
 
+> **Live site:** https://dwcl-hrs.vercel.app runs in demo mode (data resets). To make it permanent with a hosted database, follow [docs/DATABASE_HOSTING.md](docs/DATABASE_HOSTING.md).
+
 ## Accounts
 
 The password for every account below is `password`. **Change the HRDO password after you first sign in.**
