@@ -16,6 +16,7 @@
             "headers": { "cache-control": "public, max-age=31536000, immutable" },
             "continue": true
         },
+        { "src": "/(index\\.php)?", "dest": "/api/index.php" },
         { "handle": "filesystem" },
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
