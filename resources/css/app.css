@@ -1,0 +1,223 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@plugin '@tailwindcss/forms';
+
+/* ------------------------------------------------------------------
+   Design tokens — corporate navy with an academic gold accent.
+   Change the brand here and every screen follows.
+------------------------------------------------------------------- */
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+
+    --color-brand-50: #eef3fb;
+    --color-brand-100: #d9e3f5;
+    --color-brand-200: #b6c9ea;
+    --color-brand-300: #88a6da;
+    --color-brand-400: #5a7fc5;
+    --color-brand-500: #3a60ad;
+    --color-brand-600: #2b4a8f;
+    --color-brand-700: #243d74;
+    --color-brand-800: #1c2f5a;
+    --color-brand-900: #142243;
+    --color-brand-950: #0c152b;
+
+    --color-gold-50: #fbf7ec;
+    --color-gold-100: #f5ecd0;
+    --color-gold-300: #e2c77f;
+    --color-gold-400: #d4b060;
+    --color-gold-500: #c4973e;
+    --color-gold-600: #a67a2e;
+    --color-gold-700: #845e26;
+
+    --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 3px rgb(16 24 40 / 0.06);
+    --shadow-lift: 0 10px 30px -12px rgb(20 34 67 / 0.25);
+
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-slate-50 text-slate-800;
+        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-brand-500;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+}
+
+/* ------------------------------------------------------------------
+   Seamless page transitions.
+   Browsers with cross-document View Transitions crossfade + slide only
+   the main content; the sidebar and top bar are named so they stay put.
+------------------------------------------------------------------- */
+@view-transition {
+    navigation: auto;
+}
+
+.vt-sidebar { view-transition-name: sidebar; }
+.vt-topbar { view-transition-name: topbar; }
+.vt-main { view-transition-name: main; }
+.vt-site-header { view-transition-name: site-header; }
+
+::view-transition-old(main) {
+    animation: 160ms var(--ease-out-soft) both vt-fade-out;
+}
+
+::view-transition-new(main) {
+    animation: 320ms var(--ease-out-soft) both vt-slide-in;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 220ms;
+}
+
+@keyframes vt-fade-out {
+    to { opacity: 0; transform: translateY(-4px); }
+}
+
+@keyframes vt-slide-in {
+    from { opacity: 0; transform: translateY(10px); }
+}
+
+/* Fallback for browsers without View Transitions (set by app.js). */
+html.no-vt .vt-main {
+    animation: 320ms var(--ease-out-soft) both vt-slide-in;
+}
+
+/* Thin progress bar shown while the next page loads. */
+.nav-progress {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 3px;
+    z-index: 100;
+    pointer-events: none;
+    transform-origin: left;
+    transform: scaleX(0);
+    opacity: 0;
+    background: linear-gradient(90deg, var(--color-gold-400), var(--color-brand-400));
+}
+
+html.is-navigating .nav-progress {
+    opacity: 1;
+    animation: nav-progress 2.4s var(--ease-out-soft) forwards;
+}
+
+@keyframes nav-progress {
+    0% { transform: scaleX(0); }
+    40% { transform: scaleX(0.6); }
+    100% { transform: scaleX(0.92); }
+}
+
+/* Staggered entrance for cards and list rows. */
+.reveal > * {
+    animation: 420ms var(--ease-out-soft) both vt-slide-in;
+}
+.reveal > *:nth-child(2) { animation-delay: 40ms; }
+.reveal > *:nth-child(3) { animation-delay: 80ms; }
+.reveal > *:nth-child(4) { animation-delay: 120ms; }
+.reveal > *:nth-child(5) { animation-delay: 160ms; }
+.reveal > *:nth-child(n + 6) { animation-delay: 200ms; }
+
+/* ------------------------------------------------------------------
+   Components
+------------------------------------------------------------------- */
+@layer components {
+    .card {
+        @apply rounded-2xl border border-slate-200/80 bg-white shadow-(--shadow-card);
+    }
+
+    .card-hover {
+        @apply transition duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-(--shadow-lift);
+    }
+
+    .form-label {
+        @apply mb-1.5 block text-sm font-medium text-slate-700;
+    }
+
+    .form-control {
+        @apply block w-full rounded-lg border-slate-300 bg-white text-sm text-slate-900 shadow-xs transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500;
+    }
+
+    .form-control.is-invalid {
+        @apply border-rose-400 focus:border-rose-500 focus:ring-rose-500/15;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold whitespace-nowrap transition duration-200 ease-(--ease-out-soft) focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60 active:scale-[0.98];
+    }
+    .btn-sm { @apply px-3 py-1.5 text-xs; }
+    .btn-primary { @apply bg-brand-700 text-white shadow-sm hover:bg-brand-800 focus-visible:outline-brand-600; }
+    .btn-gold { @apply bg-gold-500 text-brand-950 shadow-sm hover:bg-gold-400 focus-visible:outline-gold-500; }
+    .btn-secondary { @apply border border-slate-300 bg-white text-slate-700 shadow-xs hover:border-slate-400 hover:bg-slate-50; }
+    .btn-ghost { @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900; }
+    .btn-danger { @apply bg-rose-600 text-white shadow-sm hover:bg-rose-700 focus-visible:outline-rose-600; }
+    .btn-success { @apply bg-emerald-600 text-white shadow-sm hover:bg-emerald-700 focus-visible:outline-emerald-600; }
+
+    .btn[data-loading] .btn-label { @apply opacity-70; }
+    .btn[data-loading]::before {
+        content: '';
+        @apply size-4 animate-spin rounded-full border-2 border-current border-r-transparent;
+    }
+
+    .table-clean {
+        @apply w-full text-left text-sm;
+    }
+    .table-clean thead th {
+        @apply sticky top-0 z-[1] border-b border-slate-200 bg-slate-50/95 px-4 py-3 text-xs font-semibold tracking-wide text-slate-500 uppercase backdrop-blur;
+    }
+    .table-clean tbody td {
+        @apply border-b border-slate-100 px-4 py-3.5 align-middle;
+    }
+    .table-clean tbody tr {
+        @apply transition-colors hover:bg-brand-50/40;
+    }
+
+    .nav-item {
+        @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-brand-100/80 transition hover:bg-white/8 hover:text-white;
+    }
+    .nav-item.is-active {
+        @apply bg-white/12 text-white shadow-[inset_3px_0_0_var(--color-gold-400)];
+    }
+
+    .chip {
+        @apply inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 transition hover:border-brand-300 hover:text-brand-700;
+    }
+    .chip.is-active {
+        @apply border-brand-700 bg-brand-700 text-white;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Print (certificates, SAW reports)
+------------------------------------------------------------------- */
+@media print {
+    .no-print { display: none !important; }
+    body { background: white; }
+    .card { box-shadow: none; border-color: #ddd; }
+    @page { margin: 14mm; }
+}

@@ -1,0 +1,53 @@
+{
+  "_fonts-CzxfVx6R.css": {
+    "file": "assets/fonts-CzxfVx6R.css",
+    "src": "_fonts-CzxfVx6R.css"
+  },
+  "_inter-400-normal-C38fXH4l.woff2": {
+    "file": "assets/inter-400-normal-C38fXH4l.woff2",
+    "src": "_inter-400-normal-C38fXH4l.woff2"
+  },
+  "_inter-400-normal-CyCys3Eg.woff": {
+    "file": "assets/inter-400-normal-CyCys3Eg.woff",
+    "src": "_inter-400-normal-CyCys3Eg.woff"
+  },
+  "_inter-500-normal-BL9OpVg8.woff": {
+    "file": "assets/inter-500-normal-BL9OpVg8.woff",
+    "src": "_inter-500-normal-BL9OpVg8.woff"
+  },
+  "_inter-500-normal-Cerq10X2.woff2": {
+    "file": "assets/inter-500-normal-Cerq10X2.woff2",
+    "src": "_inter-500-normal-Cerq10X2.woff2"
+  },
+  "_inter-600-normal-CiBQ2DWP.woff": {
+    "file": "assets/inter-600-normal-CiBQ2DWP.woff",
+    "src": "_inter-600-normal-CiBQ2DWP.woff"
+  },
+  "_inter-600-normal-LgqL8muc.woff2": {
+    "file": "assets/inter-600-normal-LgqL8muc.woff2",
+    "src": "_inter-600-normal-LgqL8muc.woff2"
+  },
+  "_inter-700-normal-BLAVimhd.woff": {
+    "file": "assets/inter-700-normal-BLAVimhd.woff",
+    "src": "_inter-700-normal-BLAVimhd.woff"
+  },
+  "_inter-700-normal-Yt3aPRUw.woff2": {
+    "file": "assets/inter-700-normal-Yt3aPRUw.woff2",
+    "src": "_inter-700-normal-Yt3aPRUw.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-CR2SQH4O.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DM3c0F4W.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
